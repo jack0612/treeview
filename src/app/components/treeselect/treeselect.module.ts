@@ -1,8 +1,5 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-// import { SharedModule } from "primeng/api";
-// import { RippleModule } from "primeng/ripple";
-//import { TreeModule } from "primeng/tree";
 import { TreeSelect } from "./treeselect";
 import { TreeModule } from "../tree/tree.module";
 import { SharedModule } from "../api/shared";
