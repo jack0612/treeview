@@ -9,7 +9,7 @@ import {PanelModule} from 'primeng/panel';
 import {FormsModule} from '@angular/forms';
 import { NodeService } from './nodeservice';
 import { HttpClientModule } from '@angular/common/http';
-import { TreeSelectModule } from './components/treeselect/public_api';
+import { TreeSelectModule } from './components/treeselect/treeselect.module';
 
 
 

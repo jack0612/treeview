@@ -679,9 +679,4 @@ export class TreeSelect implements AfterContentInit {
     }
 }
 
-@NgModule({
-    imports: [CommonModule,RippleModule,SharedModule,TreeModule],
-    exports: [TreeSelect,SharedModule,TreeModule],
-    declarations: [TreeSelect]
-})
-export class TreeSelectModule { }
+
