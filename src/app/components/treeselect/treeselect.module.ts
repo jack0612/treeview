@@ -2,8 +2,9 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { SharedModule } from "primeng/api";
 import { RippleModule } from "primeng/ripple";
-import { TreeModule } from "primeng/tree";
+//import { TreeModule } from "primeng/tree";
 import { TreeSelect } from "./treeselect";
+import { TreeModule } from "../tree/public_api";
 
 @NgModule({
     imports: [CommonModule,RippleModule,SharedModule,TreeModule],
