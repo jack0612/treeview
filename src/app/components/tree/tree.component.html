@@ -1,0 +1,63 @@
+ 
+<div [ngClass]="{'p-tree p-component':true,'p-tree-selectable':selectionMode,
+        'p-treenode-dragover':dragHover,'p-tree-loading': loading, 'p-tree-flex-scrollable': scrollHeight === 'flex'}"
+    [ngStyle]="style" [class]="styleClass" *ngIf="!horizontal"
+    (drop)="onDrop($event)" (dragover)="onDragOver($event)" (dragenter)="onDragEnter()" (dragleave)="onDragLeave($event)">
+    <div class="p-tree-loading-overlay p-component-overlay" *ngIf="loading">
+        <i [class]="'p-tree-loading-icon pi-spin ' + loadingIcon"></i>
+    </div>
+    <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+    <div *ngIf="filter" class="p-tree-filter-container">
+        <input #filter type="text" autocomplete="off" class="p-tree-filter p-inputtext p-component" [attr.placeholder]="filterPlaceholder"
+            (keydown.enter)="$event.preventDefault()" (input)="_filter($event.target)">
+            <span class="p-tree-filter-icon pi pi-search"></span>
+    </div>
+
+    <p-scroller #scroller *ngIf="virtualScroll" [items]="serializedValue" styleClass="p-tree-wrapper" [style]="{'height': scrollHeight}" [itemSize]="virtualScrollItemSize||_virtualNodeHeight"
+        [lazy]="lazy" (onScroll)="onScroll.emit($event)" (onScrollIndexChange)="onScrollIndexChange.emit($event)" (onLazyLoad)="onLazyLoad.emit($event)" [options]="virtualScrollOptions">
+        <ng-template pTemplate="content" let-items let-scrollerOptions="options">
+            <ul *ngIf="items" class="p-tree-container" [ngClass]="scrollerOptions.contentStyleClass" [style]="scrollerOptions.contentStyle" role="tree" [attr.aria-label]="ariaLabel" [attr.aria-labelledby]="ariaLabelledBy">
+                <p-treeNode *ngFor="let rowNode of items; let firstChild=first;let lastChild=last; let index=index;" [level]="rowNode.level"
+                            [rowNode]="rowNode" [node]="rowNode.node" [firstChild]="firstChild" [lastChild]="lastChild" [index]="getIndex(scrollerOptions, index)" [itemSize]="scrollerOptions.itemSize" [indentation]="indentation"></p-treeNode>
+            </ul>
+        </ng-template>
+        <ng-container *ngIf="loaderTemplate">
+            <ng-template pTemplate="loader" let-scrollerOptions="options">
+                <ng-container *ngTemplateOutlet="loaderTemplate; context: {options: scrollerOptions}"></ng-container>
+            </ng-template>
+        </ng-container>
+    </p-scroller>
+    <ng-container *ngIf="!virtualScroll">
+        <div #wrapper class="p-tree-wrapper" [style.max-height]="scrollHeight">
+            <ul class="p-tree-container" *ngIf="getRootNode()" role="tree" [attr.aria-label]="ariaLabel" [attr.aria-labelledby]="ariaLabelledBy">
+                <p-treeNode *ngFor="let node of getRootNode(); let firstChild=first;let lastChild=last; let index=index;" [node]="node"
+                            [firstChild]="firstChild" [lastChild]="lastChild" [index]="index" [level]="0"></p-treeNode>
+            </ul>
+        </div>
+    </ng-container>
+
+    <div class="p-tree-empty-message" *ngIf="!loading && (getRootNode() == null || getRootNode().length === 0)">
+        <ng-container *ngIf="!emptyMessageTemplate">
+            {{emptyMessageLabel}}
+        </ng-container>
+        <!-- <ng-container *ngIf="emptyMessageTemplate" *ngTemplateOutlet="emptyMessageTemplate"></ng-container> -->
+    </div>
+    <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
+</div>
+<div [ngClass]="{'p-tree p-tree-horizontal p-component':true,'p-tree-selectable':selectionMode}"  [ngStyle]="style" [class]="styleClass" *ngIf="horizontal">
+    <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+    <div class="p-tree-loading-mask p-component-overlay" *ngIf="loading">
+        <i [class]="'p-tree-loading-icon pi-spin ' + loadingIcon"></i>
+    </div>
+    <table *ngIf="value&&value[0]">
+        <p-treeNode [node]="value[0]" [root]="true"></p-treeNode>
+    </table>
+    <div class="p-tree-empty-message" *ngIf="!loading && (getRootNode() == null || getRootNode().length === 0)">
+        <ng-container *ngIf="!emptyMessageTemplate">
+            {{emptyMessageLabel}}
+        </ng-container>
+        <!-- <ng-container *ngIf="emptyMessageTemplate" *ngTemplateOutlet="emptyMessageTemplate"></ng-container> -->
+    </div>
+    <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
+</div>
+ 
