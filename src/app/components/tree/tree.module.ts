@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 
  
-//import { ScrollerModule } from "primeng/scroller";
+
 import { Tree } from "./tree";
 import { UITreeNode } from "./tree-node.component";
 import { SharedModule } from "../api/shared";
