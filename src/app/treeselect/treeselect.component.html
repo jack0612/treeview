@@ -1,0 +1,99 @@
+<div #container [ngClass]="containerClass()" [class]="containerStyleClass" [ngStyle]="containerStyle"
+    (click)="onClick($event)">
+    <div class="p-hidden-accessible">
+        <input #focusInput type="text" role="listbox" [attr.id]="inputId" readonly [disabled]="disabled"
+            (focus)="onFocus()" (blur)="onBlur()" (keydown)="onKeyDown($event)" [attr.tabindex]="tabindex"
+            aria-haspopup="true" [attr.aria-expanded]="overlayVisible" [attr.aria-labelledby]="ariaLabelledBy" />
+    </div>
+    <div class="p-treeselect-label-container">
+        <div [ngClass]="labelClass()" [class]="labelStyleClass" [ngStyle]="labelStyle">
+            <ng-container *ngIf="valueTemplate; else defaultValueTemplate">
+                <ng-container
+                    *ngTemplateOutlet="valueTemplate; context: { $implicit: value, placeholder: placeholder }"></ng-container>
+            </ng-container>
+            <ng-template #defaultValueTemplate>
+                <ng-container *ngIf="display === 'comma'; else chipsValueTemplate">
+                    {{ label || 'empty' }}
+                </ng-container>
+                <ng-template #chipsValueTemplate>
+                    <div *ngFor="let node of value" class="p-treeselect-token">
+                        <span class="p-treeselect-token-label">{{ node.label }}</span>
+                    </div>
+                    <ng-container *ngIf="emptyValue">{{ placeholder || 'empty' }}</ng-container>
+                </ng-template>
+            </ng-template>
+        </div>
+        <ng-container *ngIf="checkValue() && !disabled && showClear">
+            <TimesIcon *ngIf="!clearIconTemplate" [styleClass]="'p-treeselect-clear-icon'" (click)="clear($event)">
+            </TimesIcon>
+            <span *ngIf="clearIconTemplate" class="p-treeselect-clear-icon" (click)="clear($event)">
+                <ng-template *ngTemplateOutlet="clearIconTemplate"></ng-template>
+            </span>
+        </ng-container>
+    </div>
+    <div class="p-treeselect-trigger">
+        <ChevronDownIcon *ngIf="!triggerIconTemplate" [styleClass]="'p-treeselect-trigger-icon'"></ChevronDownIcon>
+        <span *ngIf="triggerIconTemplate" class="p-treeselect-trigger-icon">
+            <ng-template *ngTemplateOutlet="triggerIconTemplate"></ng-template>
+        </span>
+    </div>
+
+    <p-overlay #overlay [(visible)]="overlayVisible" [options]="overlayOptions" [target]="'@parent'"
+        [appendTo]="appendTo" [showTransitionOptions]="showTransitionOptions"
+        [hideTransitionOptions]="hideTransitionOptions" (onAnimationStart)="onOverlayAnimationStart($event)"
+        (onShow)="onShow.emit($event)" (onHide)="hide($event)">
+        <ng-template pTemplate="content">
+            <div #panel class="p-treeselect-panel p-component" [ngStyle]="panelStyle" [class]="panelStyleClass"
+                [ngClass]="panelClass">
+                <ng-container
+                    *ngTemplateOutlet="headerTemplate; context: { $implicit: value, options: options }"></ng-container>
+                <div class="p-treeselect-header" *ngIf="filter">
+                    <div class="p-treeselect-filter-container">
+                        <input #filter type="text" autocomplete="off"
+                            class="p-treeselect-filter p-inputtext p-component" [attr.placeholder]="filterPlaceholder"
+                            (keydown.enter)="$event.preventDefault()" (input)="onFilterInput($event)"
+                            [value]="filterValue" />
+                        <SearchIcon *ngIf="!filterIconTemplate" [styleClass]="'p-treeselect-filter-icon'"></SearchIcon>
+                        <span *ngIf="filterIconTemplate" class="p-treeselect-filter-icon">
+                            <ng-template *ngTemplateOutlet="filterIconTemplate"></ng-template>
+                        </span>
+                    </div>
+                    <button class="p-treeselect-close p-link" (click)="hide()">
+                        <TimesIcon *ngIf="!closeIconTemplate" [styleClass]="'p-treeselect-filter-icon'"></TimesIcon>
+                        <span *ngIf="closeIconTemplate" class="p-treeselect-filter-icon">
+                            <ng-template *ngTemplateOutlet="closeIconTemplate"></ng-template>
+                        </span>
+                    </button>
+                </div>
+                <div class="p-treeselect-items-wrapper" [ngStyle]="{ 'max-height': scrollHeight }">
+                    <p-tree #tree [value]="options" [propagateSelectionDown]="propagateSelectionDown"
+                        [propagateSelectionUp]="propagateSelectionUp" [selectionMode]="selectionMode"
+                        (selectionChange)="onSelectionChange($event)" [selection]="value"
+                        [metaKeySelection]="metaKeySelection" (onNodeExpand)="nodeExpand($event)"
+                        (onNodeCollapse)="nodeCollapse($event)" (onNodeSelect)="onSelect($event)"
+                        [emptyMessage]="emptyMessage" (onNodeUnselect)="onUnselect($event)" [filterBy]="filterBy"
+                        [filterMode]="filterMode" [filterPlaceholder]="filterPlaceholder" [filterLocale]="filterLocale"
+                        [filteredNodes]="filteredNodes" [templateMap]="templateMap">
+                        <ng-container *ngIf="emptyTemplate">
+                            <ng-template pTemplate="empty">
+                                <ng-container *ngTemplateOutlet="emptyTemplate"></ng-container>
+                            </ng-template>
+                        </ng-container>
+                        <ng-template pTemplate="togglericon" let-expanded *ngIf="itemTogglerIconTemplate">
+                            <ng-container
+                                *ngTemplateOutlet="itemTogglerIconTemplate; context: { $implicit: expanded }"></ng-container>
+                        </ng-template>
+                        <ng-template pTemplate="checkboxicon" *ngIf="itemCheckboxIconTemplate">
+                            <ng-template *ngTemplateOutlet="itemCheckboxIconTemplate"></ng-template>
+                        </ng-template>
+                        <ng-template pTemplate="loadingicon" *ngIf="itemLoadingIconTemplate">
+                            <ng-container *ngTemplateOutlet="itemLoadingIconTemplate"></ng-container>
+                        </ng-template>
+                    </p-tree>
+                </div>
+                <ng-container
+                    *ngTemplateOutlet="footerTemplate; context: { $implicit: value, options: options }"></ng-container>
+            </div>
+        </ng-template>
+    </p-overlay>
+</div>
