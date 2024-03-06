@@ -1,11 +1,12 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 
-import { RippleModule } from "primeng/ripple";
+ 
 import { ScrollerModule } from "primeng/scroller";
 import { Tree } from "./tree";
 import { UITreeNode } from "./tree-node.component";
 import { SharedModule } from "../api/shared";
+import { RippleModule } from "../api/ripple";
  
 
 @NgModule({
