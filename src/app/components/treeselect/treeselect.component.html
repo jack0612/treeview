@@ -1,0 +1,58 @@
+ 
+<div #container [ngClass]="containerClass()" (click)="onClick($event)">
+    <div class="p-hidden-accessible">
+        <input #focusInput type="text" role="listbox" [attr.id]="inputId" readonly [disabled]="disabled" (focus)="onFocus()" (blur)="onBlur()" (keydown)="onKeyDown($event)" [attr.tabindex]="tabindex"
+        aria-haspopup="true" [attr.aria-expanded]="overlayVisible" [attr.aria-labelledby]="ariaLabelledBy"/>
+    </div>
+    <div class="p-treeselect-label-container">
+        <div [ngClass]="labelClass()">
+            <ng-container *ngIf="valueTemplate;else defaultValueTemplate">
+                    <ng-container *ngTemplateOutlet="valueTemplate; context: {$implicit: value, placeholder: placeholder}"></ng-container>
+            </ng-container>
+            <ng-template #defaultValueTemplate>
+                <ng-container *ngIf="display === 'comma';else chipsValueTemplate">
+                    {{label || 'empty'}}
+                </ng-container>
+                <ng-template #chipsValueTemplate>
+                    <div *ngFor="let node of value" class="p-treeselect-token">
+                        <span class="p-treeselect-token-label">{{node.label}}</span>
+                    </div>
+                    <ng-container *ngIf="emptyValue">{{placeholder || 'empty'}}</ng-container>
+                </ng-template>
+            </ng-template>
+        </div>
+        <i *ngIf="checkValue() && !disabled && showClear" class="p-treeselect-clear-icon pi pi-times" (click)="clear($event)"></i>
+
+    </div>
+    <div class="p-treeselect-trigger">
+        <span class="p-treeselect-trigger-icon pi pi-chevron-down"></span>
+    </div>
+    overlayVisible:{{overlayVisible}},filter{{filter}}
+    <div #overlayRef class="p-treeselect-panel p-component" *ngIf="overlayVisible" (click)="onOverlayClick($event)"
+        [@overlayAnimation]="{value: 'visible', params: {showTransitionParams: showTransitionOptions, hideTransitionParams: hideTransitionOptions}}" (@overlayAnimation.start)="onOverlayAnimationStart($event)" (@overlayAnimation.done)="onOverlayAnimationDone($event)">
+        <ng-container *ngTemplateOutlet="headerTemplate; context: {$implicit: value, options: options}"></ng-container>
+        <div class="p-treeselect-header" *ngIf="filter">
+            <div class="p-treeselect-filter-container">
+            <input #filter type="text" autocomplete="off" class="p-treeselect-filter p-inputtext p-component" [attr.placeholder]="filterPlaceholder" (keydown.enter)="$event.preventDefault()" (input)="onFilterInput($event)" [value]="filterValue">
+                <span class="p-treeselect-filter-icon pi pi-search"></span>
+            </div>
+            <button class="p-treeselect-close p-link" (click)="hide()">
+                <span class="p-treeselect-filter-icon pi pi-times"></span>
+            </button>
+        </div>
+        <div class="p-treeselect-items-wrapper" [ngStyle]="{'max-height': scrollHeight}">
+            <span>p-tree</span>
+            <p-tree #tree [value]="options" [propagateSelectionDown]="propagateSelectionDown" [propagateSelectionUp]="propagateSelectionUp" [selectionMode]="selectionMode" (selectionChange)="onSelectionChange($event)" [selection]="value"
+                [metaKeySelection]="metaKeySelection" (onNodeExpand)="nodeExpand($event)" (onNodeCollapse)="nodeCollapse($event)"
+                (onNodeSelect)="onSelect($event)" [emptyMessage]="emptyMessage" (onNodeUnselect)="onUnselect($event)" [filterBy]="filterBy" [filterMode]="filterMode" [filterPlaceholder]="filterPlaceholder" [filterLocale]="filterLocale"  [filteredNodes]="filteredNodes">
+                    <ng-container *ngIf="emptyTemplate">
+                        <ng-template pTemplate="empty">
+                            <ng-container *ngTemplateOutlet="emptyTemplate;"></ng-container>
+                        </ng-template>
+                    </ng-container>
+            </p-tree>
+        </div>
+        <ng-container *ngTemplateOutlet="footerTemplate; context: {$implicit: value, options: options}"></ng-container>
+    </div>
+</div>
+ 
