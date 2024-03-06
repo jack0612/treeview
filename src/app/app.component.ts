@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import { MenuItem, MessageService } from 'primeng/api';
+import { Component, OnInit } from '@angular/core';
+import { MenuItem, MessageService, TreeNode } from 'primeng/api';
 import { NodeService } from './nodeservice';
 
 
@@ -15,24 +15,74 @@ import { NodeService } from './nodeservice';
   `],
   providers: [MessageService]
 })
-export class AppComponent { 
-    nodes1!: any[];
+export class AppComponent {
+  nodes1!: any[];
 
-    nodes2!: any[];
+  nodes2!: any[];
 
-    nodes3!: any[];
+  nodes3!: any[];
 
-    selectedNodes1: any[] = [];
+  selectedNodes1: any[] = [];
 
-    selectedNodes2: any[] = [];
+  selectedNodes2: any[] = [];
 
-    selectedNode: any;
+  selectedNode: any;
 
-    constructor(public nodeService: NodeService) { }
+  constructor(public nodeService: NodeService) { }
 
-    ngOnInit() {
-        this.nodeService.getFiles().then(files => this.nodes1 = files);
-        this.nodeService.getFiles().then(files => this.nodes2 = files);
-        this.nodeService.getFiles().then(files => this.nodes3 = files);
-    }    
+  ngOnInit() {
+    this.nodeService.getFiles().then(files => this.nodes1 = files);
+    this.nodeService.getFiles().then(files => this.nodes2 = files);
+    this.nodeService.getFiles().then(files => this.nodes3 = files);
+    this.nodeService.getFiles().then(files => this.files1 = files);
+    //this.setFiles1();
+  }
+
+  files1: TreeNode[] = [];
+
+  setFiles1() {
+    this.files1 = [
+      {
+        label: 'A',
+        children: [
+          {
+            label: 'B',
+
+            children: [
+              {
+                label: 'C',
+              },
+              {
+                label: 'D',
+              },
+            ],
+          },
+          {
+            label: 'E',
+
+            children: [
+              {
+                label: 'F',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        label: 'G',
+
+        children: [
+          {
+            label: 'H',
+          },
+          {
+            label: 'I',
+          },
+          {
+            label: 'J',
+          },
+        ],
+      },
+    ];
+  }
 }
