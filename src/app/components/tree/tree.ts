@@ -7,12 +7,13 @@ import { Optional } from '@angular/core';
  
 // import { TreeDragDropService } from 'primeng/api';
 import { Subscription } from 'rxjs';
-import { BlockableUI } from 'primeng/api';
+// import { BlockableUI } from 'primeng/api';
 import { Scroller, ScrollerOptions } from 'primeng/scroller';
 import { DomHandler } from 'src/app/utility/domhandler';
 import { PrimeTemplate } from '../api/shared';
 import { ObjectUtils } from 'src/app/utility/objectutils';
 import { TreeNode } from 'src/app/models.ts/treenode';
+import { BlockableUI } from 'src/app/models.ts/blockableui';
 
 
 @Component({
