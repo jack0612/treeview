@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Output, Input, ChangeDetectionStrategy, ViewEncapsulation, ContentChildren, AfterContentInit, TemplateRef, QueryList, forwardRef, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 
-//import {   PrimeNGConfig } from 'primeng/api';
+
 import { animate, style, transition, trigger, AnimationEvent } from '@angular/animations';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
-// import {  ZIndexUtils } from 'primeng/utils';
+
 import { DomHandler } from 'src/app/utility/domhandler';
 import { PrimeTemplate } from '../api/shared';
 import { Tree } from '../tree/public_api';

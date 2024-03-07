@@ -10,16 +10,14 @@ import { NodeService } from './nodeservice';
 import { HttpClientModule } from '@angular/common/http';
 import { TreeSelectModule } from './components/treeselect/treeselect.module';
 
-// import {ButtonModule} from 'primeng/button';
-// import {PanelModule} from 'primeng/panel';
+
 
 
 @NgModule({
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    // ButtonModule,
-    // PanelModule,
+
 		FormsModule,
     HttpClientModule,
     TreeSelectModule

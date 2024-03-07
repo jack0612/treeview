@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {  MessageService } from 'primeng/api';
+
 import { NodeService } from './nodeservice';
 import { TreeNode } from './models.ts/treenode';
 
@@ -15,7 +15,7 @@ import { TreeNode } from './models.ts/treenode';
           display: inline-flex;
       }
   `],
-  providers: [MessageService]
+  // providers: [MessageService]
 })
 export class AppComponent {
   nodes1!: any[];
