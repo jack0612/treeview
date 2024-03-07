@@ -5,10 +5,11 @@ import { animate, style, transition, trigger, AnimationEvent } from '@angular/an
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ConnectedOverlayScrollHandler } from 'primeng/dom';
 
-import { ObjectUtils, ZIndexUtils } from 'primeng/utils';
+import {  ZIndexUtils } from 'primeng/utils';
 import { DomHandler } from 'src/app/utility/domhandler';
 import { PrimeTemplate } from '../api/shared';
 import { Tree } from '../tree/public_api';
+import { ObjectUtils } from 'src/app/utility/objectutils';
 
 
 export const TREESELECT_VALUE_ACCESSOR: any = {
