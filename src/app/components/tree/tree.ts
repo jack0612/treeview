@@ -9,8 +9,8 @@ import { TreeDragDropService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { BlockableUI } from 'primeng/api';
 import { ObjectUtils } from 'primeng/utils';
-import { DomHandler } from 'primeng/dom';
 import { Scroller, ScrollerOptions } from 'primeng/scroller';
+import { DomHandler } from 'src/app/utility/domhandler';
 
 
 @Component({

@@ -5,8 +5,8 @@ import {
 
 import { TreeNode } from 'primeng/api';
 ;
-import { DomHandler } from 'primeng/dom';
 import { Tree } from './tree';
+import { DomHandler } from 'src/app/utility/domhandler';
 
 @Component({
     selector: 'p-treeNode',
