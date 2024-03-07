@@ -3,7 +3,7 @@ import {
     ContentChildren, QueryList, TemplateRef, Inject, ElementRef, forwardRef, ChangeDetectionStrategy, SimpleChanges, ViewEncapsulation, ViewChild
 } from '@angular/core';
 import { Optional } from '@angular/core';
-import { PrimeNGConfig, TranslationKeys } from 'primeng/api';
+// import { PrimeNGConfig, TranslationKeys } from 'primeng/api';
  
 import { TreeDragDropService } from 'primeng/api';
 import { Subscription } from 'rxjs';
@@ -165,7 +165,7 @@ export class Tree implements OnInit, AfterContentInit, OnChanges, OnDestroy, Blo
 
     public dragStopSubscription!: Subscription;
 
-    constructor(public el: ElementRef, @Optional() public dragDropService: TreeDragDropService, public config: PrimeNGConfig) { }
+    constructor(public el: ElementRef, @Optional() public dragDropService: TreeDragDropService, /*public config: PrimeNGConfig*/) { }
 
     ngOnInit() {
         if (this.droppableNodes) {
@@ -201,7 +201,7 @@ export class Tree implements OnInit, AfterContentInit, OnChanges, OnDestroy, Blo
     }
 
     get emptyMessageLabel(): string {
-        return this.emptyMessage || this.config.getTranslation(TranslationKeys.EMPTY_MESSAGE);
+        return this.emptyMessage /*|| this.config.getTranslation(TranslationKeys.EMPTY_MESSAGE)*/;
     }
 
     ngAfterContentInit() {
