@@ -2,7 +2,8 @@ import { NgModule, Component, Input, ElementRef, ViewChild, ChangeDetectionStrat
 import { CommonModule } from '@angular/common';
  
 import { DomHandler } from 'src/app/utility/domhandler';
-import { PrimeTemplate } from './shared';
+import { PrimeTemplate } from '../api/shared';
+
 
 export type ScrollerToType = 'to-start' | 'to-end' | undefined;
 

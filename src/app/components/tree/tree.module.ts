@@ -7,7 +7,8 @@ import { Tree } from "./tree";
 import { UITreeNode } from "./tree-node.component";
 import { SharedModule } from "../api/shared";
 import { RippleModule } from "../api/ripple";
-import { ScrollerModule } from "../api/scroller";
+import { ScrollerModule } from "../scroller/scroller";
+ 
  
 
 @NgModule({
