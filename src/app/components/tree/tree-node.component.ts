@@ -171,11 +171,11 @@ export class UITreeNode implements OnInit {
             newNodeList.push(event.dragNode);
         }
 
-        this.tree.dragDropService.stopDrag({
-            node: event.dragNode,
-            subNodes: event.dropNode.parent ? event.dropNode.parent.children : this.tree.value,
-            index: event.dragNodeIndex
-        });
+        // this.tree.dragDropService.stopDrag({
+        //     node: event.dragNode,
+        //     subNodes: event.dropNode.parent ? event.dropNode.parent.children : this.tree.value,
+        //     index: event.dragNodeIndex
+        // });
     }
 
     createDropPointEventMetadata(position: any) {
@@ -212,13 +212,13 @@ export class UITreeNode implements OnInit {
         if (this.tree.draggableNodes && this.node.draggable !== false) {
             event.dataTransfer.setData("text", "data");
 
-            this.tree.dragDropService.startDrag({
-                tree: this,
-                node: this.node,
-                subNodes: this.node.parent ? this.node.parent.children : this.tree.value,
-                index: this.index,
-                scope: this.tree.draggableScope
-            });
+            // this.tree.dragDropService.startDrag({
+            //     tree: this,
+            //     node: this.node,
+            //     subNodes: this.node.parent ? this.node.parent.children : this.tree.value,
+            //     index: this.index,
+            //     scope: this.tree.draggableScope
+            // });
         }
         else {
             event.preventDefault();
@@ -226,11 +226,11 @@ export class UITreeNode implements OnInit {
     }
 
     onDragStop(event: any) {
-        this.tree.dragDropService.stopDrag({
-            node: this.node,
-            subNodes: this.node.parent ? this.node.parent.children : this.tree.value,
-            index: this.index
-        });
+        // this.tree.dragDropService.stopDrag({
+        //     node: this.node,
+        //     subNodes: this.node.parent ? this.node.parent.children : this.tree.value,
+        //     index: this.index
+        // });
     }
 
     onDropNodeDragOver(event: any) {
@@ -294,11 +294,11 @@ export class UITreeNode implements OnInit {
         else
             event.dropNode.children = [event.dragNode];
 
-        this.tree.dragDropService.stopDrag({
-            node: event.dragNode,
-            subNodes: event.dropNode.parent ? event.dropNode.parent.children : this.tree.value,
-            index: dragNodeIndex
-        });
+        // this.tree.dragDropService.stopDrag({
+        //     node: event.dragNode,
+        //     subNodes: event.dropNode.parent ? event.dropNode.parent.children : this.tree.value,
+        //     index: dragNodeIndex
+        // });
     }
 
     onDropNodeDragEnter(event: any) {

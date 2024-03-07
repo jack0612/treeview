@@ -5,7 +5,7 @@ import {
 import { Optional } from '@angular/core';
 // import { PrimeNGConfig, TranslationKeys } from 'primeng/api';
  
-import { TreeDragDropService } from 'primeng/api';
+// import { TreeDragDropService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { BlockableUI } from 'primeng/api';
 import { Scroller, ScrollerOptions } from 'primeng/scroller';
@@ -165,29 +165,29 @@ export class Tree implements OnInit, AfterContentInit, OnChanges, OnDestroy, Blo
 
     public dragStopSubscription!: Subscription;
 
-    constructor(public el: ElementRef, @Optional() public dragDropService: TreeDragDropService, /*public config: PrimeNGConfig*/) { }
+    constructor(public el: ElementRef, /*@Optional() public dragDropService: TreeDragDropService,*/ /*public config: PrimeNGConfig*/) { }
 
     ngOnInit() {
-        if (this.droppableNodes) {
-            this.dragStartSubscription = this.dragDropService.dragStart$.subscribe(
-                event => {
-                    this.dragNodeTree = event.tree;
-                    this.dragNode = event.node as TreeNode<any>;
-                    this.dragNodeSubNodes = event.subNodes as TreeNode<any>[];
-                    this.dragNodeIndex = event.index as number;
-                    this.dragNodeScope = event.scope;
-                });
+        // if (this.droppableNodes) {
+        //     this.dragStartSubscription = this.dragDropService.dragStart$.subscribe(
+        //         event => {
+        //             this.dragNodeTree = event.tree;
+        //             this.dragNode = event.node as TreeNode<any>;
+        //             this.dragNodeSubNodes = event.subNodes as TreeNode<any>[];
+        //             this.dragNodeIndex = event.index as number;
+        //             this.dragNodeScope = event.scope;
+        //         });
 
-            this.dragStopSubscription = this.dragDropService.dragStop$.subscribe(
-                event => {
-                    this.dragNodeTree = null;
-                    this.dragNode = null;
-                    this.dragNodeSubNodes = null;
-                    this.dragNodeIndex = null;
-                    this.dragNodeScope = null;
-                    this.dragHover = false;
-                });
-        }
+        //     this.dragStopSubscription = this.dragDropService.dragStop$.subscribe(
+        //         event => {
+        //             this.dragNodeTree = null;
+        //             this.dragNode = null;
+        //             this.dragNodeSubNodes = null;
+        //             this.dragNodeIndex = null;
+        //             this.dragNodeScope = null;
+        //             this.dragHover = false;
+        //         });
+        // }
     }
 
     ngOnChanges(simpleChange: SimpleChanges) {
@@ -539,67 +539,67 @@ export class Tree implements OnInit, AfterContentInit, OnChanges, OnDestroy, Blo
     }
 
     onDragOver(event: any) {
-        if (this.droppableNodes && (!this.value || this.value.length === 0)) {
-            event.dataTransfer.dropEffect = 'move';
-            event.preventDefault();
-        }
+        // if (this.droppableNodes && (!this.value || this.value.length === 0)) {
+        //     event.dataTransfer.dropEffect = 'move';
+        //     event.preventDefault();
+        // }
     }
 
     onDrop(event: any) {
-        if (this.droppableNodes && (!this.value || this.value.length === 0)) {
-            event.preventDefault();
-            let dragNode = this.dragNode;
+        // if (this.droppableNodes && (!this.value || this.value.length === 0)) {
+        //     event.preventDefault();
+        //     let dragNode = this.dragNode;
 
-            if (this.allowDrop(dragNode, null, this.dragNodeScope)) {
-                let dragNodeIndex = this.dragNodeIndex;
-                this.value = this.value || [];
+        //     if (this.allowDrop(dragNode, null, this.dragNodeScope)) {
+        //         let dragNodeIndex = this.dragNodeIndex;
+        //         this.value = this.value || [];
 
-                if (this.validateDrop) {
-                    this.onNodeDrop.emit({
-                        originalEvent: event,
-                        dragNode: dragNode,
-                        dropNode: null,
-                        index: dragNodeIndex,
-                        accept: () => {
-                            this.processTreeDrop(dragNode, dragNodeIndex);
-                        }
-                    });
-                }
-                else {
-                    this.onNodeDrop.emit({
-                        originalEvent: event,
-                        dragNode: dragNode,
-                        dropNode: null,
-                        index: dragNodeIndex
-                    });
+        //         if (this.validateDrop) {
+        //             this.onNodeDrop.emit({
+        //                 originalEvent: event,
+        //                 dragNode: dragNode,
+        //                 dropNode: null,
+        //                 index: dragNodeIndex,
+        //                 accept: () => {
+        //                     this.processTreeDrop(dragNode, dragNodeIndex);
+        //                 }
+        //             });
+        //         }
+        //         else {
+        //             this.onNodeDrop.emit({
+        //                 originalEvent: event,
+        //                 dragNode: dragNode,
+        //                 dropNode: null,
+        //                 index: dragNodeIndex
+        //             });
 
-                    this.processTreeDrop(dragNode, dragNodeIndex);
-                }
-            }
-        }
+        //             this.processTreeDrop(dragNode, dragNodeIndex);
+        //         }
+        //     }
+        // }
     }
 
     processTreeDrop(dragNode: any, dragNodeIndex: any) {
         this.dragNodeSubNodes?.splice(dragNodeIndex, 1);
         this.value.push(dragNode);
-        this.dragDropService.stopDrag({
-            node: dragNode
-        });
+        // this.dragDropService.stopDrag({
+        //     node: dragNode
+        // });
     }
 
     onDragEnter() {
-        if (this.droppableNodes && this.allowDrop(this.dragNode, null, this.dragNodeScope)) {
-            this.dragHover = true;
-        }
+        // if (this.droppableNodes && this.allowDrop(this.dragNode, null, this.dragNodeScope)) {
+        //     this.dragHover = true;
+        // }
     }
 
     onDragLeave(event: any) {
-        if (this.droppableNodes) {
-            let rect = event.currentTarget.getBoundingClientRect();
-            if (event.x > rect.left + rect.width || event.x < rect.left || event.y > rect.top + rect.height || event.y < rect.top) {
-                this.dragHover = false;
-            }
-        }
+        // if (this.droppableNodes) {
+        //     let rect = event.currentTarget.getBoundingClientRect();
+        //     if (event.x > rect.left + rect.width || event.x < rect.left || event.y > rect.top + rect.height || event.y < rect.top) {
+        //         this.dragHover = false;
+        //     }
+        // }
     }
 
     allowDrop(dragNode: TreeNode | null, dropNode: TreeNode | null, dragNodeScope: any): boolean {
