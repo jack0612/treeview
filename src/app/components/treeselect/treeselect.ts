@@ -4,10 +4,11 @@ import { OverlayService, PrimeNGConfig,  TreeNode } from 'primeng/api';
 import { animate, style, transition, trigger, AnimationEvent } from '@angular/animations';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ConnectedOverlayScrollHandler } from 'primeng/dom';
-import { Tree } from 'primeng/tree';
+
 import { ObjectUtils, ZIndexUtils } from 'primeng/utils';
 import { DomHandler } from 'src/app/utility/domhandler';
 import { PrimeTemplate } from '../api/shared';
+import { Tree } from '../tree/public_api';
 
 
 export const TREESELECT_VALUE_ACCESSOR: any = {
@@ -313,7 +314,7 @@ export class TreeSelect implements AfterContentInit {
 
     resetFilter() {
         if (this.filter && !this.resetFilterOnHide) {
-            this.filteredNodes = this.treeViewChild.filteredNodes;
+            this.filteredNodes = this.treeViewChild.filteredNodes as TreeNode<any>[] ;
             this.treeViewChild.resetFilter();
         }
         else {
