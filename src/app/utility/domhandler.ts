@@ -2,7 +2,40 @@ export class DomHandler {
 
     public static zindex: number = 1000;
 
+    static getParents(element: any, parents:any = []): any {
+        return element['parentNode'] === null ? parents : this.getParents(element.parentNode, parents.concat([element.parentNode]));
+    }
+    static getScrollableParents(element: any) {
+        let scrollableParents = [];
 
+        if (element) {
+            let parents = this.getParents(element);
+            const overflowRegex = /(auto|scroll)/;
+            const overflowCheck = (node: any) => {
+                let styleDeclaration = window['getComputedStyle'](node, null);
+                return overflowRegex.test(styleDeclaration.getPropertyValue('overflow')) || overflowRegex.test(styleDeclaration.getPropertyValue('overflowX')) || overflowRegex.test(styleDeclaration.getPropertyValue('overflowY'));
+            };
+
+            for (let parent of parents) {
+                let scrollSelectors = parent.nodeType === 1 && parent.dataset['scrollselectors'];
+                if (scrollSelectors) {
+                    let selectors = scrollSelectors.split(',');
+                    for (let selector of selectors) {
+                        let el = this.findSingle(parent, selector);
+                        if (el && overflowCheck(el)) {
+                            scrollableParents.push(el);
+                        }
+                    }
+                }
+
+                if (parent.nodeType !== 9 && overflowCheck(parent)) {
+                    scrollableParents.push(parent);
+                }
+            }
+        }
+
+        return scrollableParents;
+    }
 
     public static addClass(element: any, className: string): void {
         if (element.classList)

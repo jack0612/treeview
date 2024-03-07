@@ -3,7 +3,6 @@ import { Component, EventEmitter, Output, Input, ChangeDetectionStrategy, ViewEn
 import { OverlayService, PrimeNGConfig } from 'primeng/api';
 import { animate, style, transition, trigger, AnimationEvent } from '@angular/animations';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ConnectedOverlayScrollHandler } from 'primeng/dom';
 
 import {  ZIndexUtils } from 'primeng/utils';
 import { DomHandler } from 'src/app/utility/domhandler';
@@ -11,6 +10,7 @@ import { PrimeTemplate } from '../api/shared';
 import { Tree } from '../tree/public_api';
 import { ObjectUtils } from 'src/app/utility/objectutils';
 import { TreeNode } from 'src/app/models.ts/treenode';
+import { ConnectedOverlayScrollHandler } from 'src/app/utility/connectedoverlayscrollhandler';
 
 
 export const TREESELECT_VALUE_ACCESSOR: any = {
