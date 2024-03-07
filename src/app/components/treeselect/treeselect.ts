@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, Input, ChangeDetectionStrategy, ViewEncapsulation, ContentChildren, AfterContentInit, TemplateRef, QueryList, forwardRef, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 
-import { OverlayService, PrimeNGConfig } from 'primeng/api';
+//import {   PrimeNGConfig } from 'primeng/api';
 import { animate, style, transition, trigger, AnimationEvent } from '@angular/animations';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -11,6 +11,7 @@ import { Tree } from '../tree/public_api';
 import { ObjectUtils } from 'src/app/utility/objectutils';
 import { TreeNode } from 'src/app/models.ts/treenode';
 import { ConnectedOverlayScrollHandler } from 'src/app/utility/connectedoverlayscrollhandler';
+import { OverlayService } from 'src/app/services/overlayservice';
 
 
 export const TREESELECT_VALUE_ACCESSOR: any = {
@@ -169,7 +170,7 @@ export class TreeSelect implements AfterContentInit {
 
     onModelTouched: Function = () => { };
 
-    constructor(public config: PrimeNGConfig, public cd: ChangeDetectorRef, public el: ElementRef, public overlayService: OverlayService) { }
+    constructor(/*public config: PrimeNGConfig,*/ public cd: ChangeDetectorRef, public el: ElementRef, public overlayService: OverlayService) { }
 
     ngOnInit() {
         this.updateTreeState();
@@ -448,7 +449,7 @@ export class TreeSelect implements AfterContentInit {
     }
 
     onOverlayEnter() {
-        ZIndexUtils.set('overlay', this.overlayEl, this.config.zIndex.overlay);
+        //ZIndexUtils.set('overlay', this.overlayEl, this.config.zIndex.overlay);
 
         if (this.filter && this.filterInputAutoFocus) {
             this.filterViewChild.nativeElement.focus();
