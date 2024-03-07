@@ -4,7 +4,7 @@ import { Component, EventEmitter, Output, Input, ChangeDetectionStrategy, ViewEn
 import { animate, style, transition, trigger, AnimationEvent } from '@angular/animations';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import {  ZIndexUtils } from 'primeng/utils';
+// import {  ZIndexUtils } from 'primeng/utils';
 import { DomHandler } from 'src/app/utility/domhandler';
 import { PrimeTemplate } from '../api/shared';
 import { Tree } from '../tree/public_api';
@@ -467,7 +467,7 @@ export class TreeSelect implements AfterContentInit {
         this.unbindOutsideClickListener();
         this.unbindScrollListener();
         this.unbindResizeListener();
-        ZIndexUtils.clear(this.overlayEl);
+        // ZIndexUtils.clear(this.overlayEl);
         this.overlayEl = null;
         this.onHide.emit();
     }
@@ -591,7 +591,7 @@ export class TreeSelect implements AfterContentInit {
         }
 
         if (this.overlayEl) {
-            ZIndexUtils.clear(this.overlayEl);
+            // ZIndexUtils.clear(this.overlayEl);
             this.overlayEl = null;
         }
     }
