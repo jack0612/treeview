@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuItem, MessageService, TreeNode } from 'primeng/api';
+import { Component } from '@angular/core';
+import {  MessageService } from 'primeng/api';
 import { NodeService } from './nodeservice';
+import { TreeNode } from './models.ts/treenode';
 
 
 

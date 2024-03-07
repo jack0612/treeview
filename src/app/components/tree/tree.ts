@@ -3,7 +3,7 @@ import {
     ContentChildren, QueryList, TemplateRef, Inject, ElementRef, forwardRef, ChangeDetectionStrategy, SimpleChanges, ViewEncapsulation, ViewChild
 } from '@angular/core';
 import { Optional } from '@angular/core';
-import { PrimeNGConfig, TranslationKeys, TreeNode } from 'primeng/api';
+import { PrimeNGConfig, TranslationKeys } from 'primeng/api';
  
 import { TreeDragDropService } from 'primeng/api';
 import { Subscription } from 'rxjs';
@@ -12,6 +12,7 @@ import { Scroller, ScrollerOptions } from 'primeng/scroller';
 import { DomHandler } from 'src/app/utility/domhandler';
 import { PrimeTemplate } from '../api/shared';
 import { ObjectUtils } from 'src/app/utility/objectutils';
+import { TreeNode } from 'src/app/models.ts/treenode';
 
 
 @Component({

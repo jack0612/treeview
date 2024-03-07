@@ -3,10 +3,11 @@ import {
     Inject, forwardRef, ViewEncapsulation,
 } from '@angular/core';
 
-import { TreeNode } from 'primeng/api';
+ 
 ;
 import { Tree } from './tree';
 import { DomHandler } from 'src/app/utility/domhandler';
+import { TreeNode } from 'src/app/models.ts/treenode';
 
 @Component({
     selector: 'p-treeNode',
